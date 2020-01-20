@@ -1,5 +1,6 @@
 const express = require("express");
 const mongojs = require("mongojs");
+const mongoose = require("mongoose");
 
 const app = express();
 
@@ -13,13 +14,13 @@ const collections = ["workouts"];
 
 const db = mongojs(databaseUrl, collections);
 
-db.on("error", error => {
-  console.log("Database Error:", error);
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workouts", {
+  useNewUrlParser: true,
+  useFindAndModify: false
 });
 
-app.get("/", (req, res) => {
-  res.send("/html/index.html");
-});
+// routes
+app.use(require("./routes/api.js"));
 
 // app.get("/all", (req, res) => {
 //   db.animals.find({}, (err, found) => {
