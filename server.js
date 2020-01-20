@@ -1,26 +1,51 @@
 const express = require("express");
-const mongojs = require("mongojs");
+const logger = require("morgan");
 const mongoose = require("mongoose");
+const path = require("path");
 
+const PORT = process.env.PORT || 3000;
+
+const db = require("./models");
 const app = express();
+
+app.use(logger("dev"));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(express.static("public"));
 
-const databaseUrl = "workoutDB";
-const collections = ["workouts"];
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workoutdb", { useNewUrlParser: true });
 
-const db = mongojs(databaseUrl, collections);
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workouts", {
-  useNewUrlParser: true,
-  useFindAndModify: false
+// const databaseUrl = "workoutDB";
+// const collections = ["workout"];
+
+// const db = mongojs(databaseUrl, collections);
+
+// db.on("error", error => {
+//   console.log("Database Error:", error);
+// });
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname + "/public/html/index.html"));
 });
 
-// routes
-app.use(require("./routes/api.js"));
+app.get("/stats", (req, res) => {
+    res.sendFile(path.join(__dirname + "/public/html/stats.html"));
+});
+
+app.get("/exercise", (req, res) => {
+    res.sendFile(path.join(__dirname + "/public/html/exercise.html"));
+});
+
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workouts", {
+//   useNewUrlParser: true,
+//   useFindAndModify: false
+// });
+
+// // routes
+// app.use(require("./routes/api.js"));
 
 // app.get("/all", (req, res) => {
 //   db.animals.find({}, (err, found) => {
@@ -53,5 +78,5 @@ app.use(require("./routes/api.js"));
 // });
 
 app.listen(3000, () => {
-  console.log("App running on port 3000!");
+  console.log(`App listening on: 'http://localhost:${PORT}'`);
 });
