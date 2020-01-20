@@ -27,17 +27,17 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workoutdb", { u
 //   console.log("Database Error:", error);
 // });
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname + "/public/html/index.html"));
-});
+// app.get("/", (req, res) => {
+//   res.sendFile(path.join(__dirname + "/public/html/index.html"));
+// });
 
-app.get("/stats", (req, res) => {
-    res.sendFile(path.join(__dirname + "/public/html/stats.html"));
-});
+// app.get("/stats", (req, res) => {
+//     res.sendFile(path.join(__dirname + "/public/html/stats.html"));
+// });
 
-app.get("/exercise", (req, res) => {
-    res.sendFile(path.join(__dirname + "/public/html/exercise.html"));
-});
+// app.get("/exercise", (req, res) => {
+//     res.sendFile(path.join(__dirname + "/public/html/exercise.html"));
+// });
 
 // mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workouts", {
 //   useNewUrlParser: true,
