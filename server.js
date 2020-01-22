@@ -1,7 +1,8 @@
 const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
-const path = require("path");
+// require("./seeders/seed");
+// const path = require("path");
 
 const PORT = process.env.PORT || 3000;
 
@@ -15,9 +16,44 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Workoutdb", { useNewUrlParser: true });
+// Routes
+require("./routes/api-routes")(app);
+require("./routes/html-routes")(app);
 
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { useNewUrlParser: true });
 
+// app.get("/", )
+
+// app.post("/api/workouts", ({body}, res) => {
+//     db.Workout.create(body)
+//     .then(dbWorkout => {
+//         res.json(dbWorkout);
+//       })
+//       .catch(err => {
+//         res.json(err);
+//       });
+// })
+
+// app.get("/api/workouts", (req, res) => {
+//     console.log("get api/workouts");
+//     db.Workout.find({}, (error, data) => {
+//         console.log(data);
+        // if (error) {
+        //   res.send(error);
+        // } else {
+        //   res.json(data);
+        // }
+//     });
+// });
+
+// app.get("/exercise", (req, res) => {
+//     console.log("get /exercise");
+//     res.sendFile("/exercise.html", (err) => {
+//         if (err) {
+//             console.log(err);
+//         }
+//     });
+// })
 // const databaseUrl = "workoutDB";
 // const collections = ["workout"];
 
@@ -25,18 +61,6 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Workoutdb", { u
 
 // db.on("error", error => {
 //   console.log("Database Error:", error);
-// });
-
-// app.get("/", (req, res) => {
-//   res.sendFile(path.join(__dirname + "/public/html/index.html"));
-// });
-
-// app.get("/stats", (req, res) => {
-//     res.sendFile(path.join(__dirname + "/public/html/stats.html"));
-// });
-
-// app.get("/exercise", (req, res) => {
-//     res.sendFile(path.join(__dirname + "/public/html/exercise.html"));
 // });
 
 // mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workouts", {
