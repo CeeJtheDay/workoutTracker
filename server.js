@@ -21,7 +21,7 @@ require("./routes/api-routes")(app);
 require("./routes/html-routes")(app);
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { useNewUrlParser: true });
-
+mongoose.set('useFindAndModify', false);
 // app.get("/", )
 
 // app.post("/api/workouts", ({body}, res) => {
