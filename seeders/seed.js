@@ -126,10 +126,10 @@ let workoutSeed = [
     day: new Date().setDate(new Date().getDate()-1),
     exercises: [
       {
-        type: "resistance",
-        name: "Bench",
+        type: "cardio",
+        name: "Running",
         duration: 30,
-        distance: 2
+        distance: 4
       }
     ]
   }
