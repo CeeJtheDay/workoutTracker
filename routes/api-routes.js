@@ -16,26 +16,23 @@ module.exports = function (app) {
     });
 
     app.post("/api/workouts", (req, res) => {
-        console.log("post that workout!")
-        //     db.Workout.create(body)
-        //         .then(dbWorkout => {
-        //             res.json(dbWorkout);
-        //         })
-        //         .catch(err => {
-        //             res.status(400).json(err);
-        //         });
-    });
+        console.log("post that workout!");
+        console.log("body before create");
+        console.log(req);
+        var newExercise = req.body;
+        db.Workout.create({})
+            .then(newWorkout => {
+                console.log("response after create!");
+                console.log(newWorkout)
+                db.Workout.findByIdAndUpdate(newWorkout._id, { $push: { exercises: newExercise } }, { new: true })
+                    .then(dbWorkout => {
+                        res.json(dbWorkout);
+                    }).catch(err => {
+                        res.status(400).json(err);
 
-    // app.get("/api/workouts/:id", (req, res) => {
-    //     console.log("get it with an id");
-    //     db.Workout.findById(req.params.id, (err, res) => { })
-    //         .then(dbWorkout => {
-    //             res.json(dbWorkout)
-    //         })
-    //         .catch(err => {
-    //             res.status(400).json(err);
-    //         });
-    // });
+                    })
+            });
+    });
 
     app.put("/api/workouts/:id", (req, res) => {
         // console.log("put it with an id");
@@ -50,13 +47,6 @@ module.exports = function (app) {
             }).catch(err => {
                 res.status(400).json(err);
             })
-        // .then(dbWorkout => {
-        //     console.log(dbWorkout);
-        //     res.json(dbWorkout)
-        // })
-        // .catch(err => {
-        //     res.status(400).json(err);
-        // });
 
     });
 
@@ -64,12 +54,12 @@ module.exports = function (app) {
     app.get("/api/workouts/range", (req, res) => {
         console.log("get that range!");
         db.Workout.find({})
-        .then(popWorkouts => {
-            res.json(popWorkouts)
-        }).catch(err => {
-            res.status(400).json(err);
-        })
-    
+            .then(popWorkouts => {
+                res.json(popWorkouts)
+            }).catch(err => {
+                res.status(400).json(err);
+            })
+
     });
 
 };
