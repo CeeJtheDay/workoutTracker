@@ -8,7 +8,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
     <title>Fitness Tracker</title>
   </head>
   <body>
@@ -23,7 +23,7 @@
       <div class="ui container exercise">
         <div class="ui raised card m-auto">
           <h2>Add Your Exercise</h2>
-          <form action="POST">
+          <form action="/api/workouts" method="POST">
             <div class="workout-type">
               <label for="type">Exercise Type:</label>
               <select name="type" id="type">
@@ -113,7 +113,7 @@
     <div id="toast">
       Workout Added Successfully!
     </div>
-    <script src="/api.js"></script>
-    <script src="/index.js"></script>
+    <script src="/assets/js/api.js"></script>
+    <script src="/assets/js/index.js"></script>
   </body>
 </html>
