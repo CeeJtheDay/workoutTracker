@@ -20,9 +20,11 @@ app.use(express.static("public"));
 require("./routes/api-routes")(app);
 require("./routes/html-routes")(app);
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://heroku_mftfbwdz:ras6mvjpv40tmat015sou8252@ds035623.mlab.com:35623/heroku_mftfbwdz", { useNewUrlParser: true });
 mongoose.set('useFindAndModify', false);
 
 app.listen(3000, () => {
   console.log(`App listening on: 'http://localhost:${PORT}'`);
 });
+
+module.exports = app;
