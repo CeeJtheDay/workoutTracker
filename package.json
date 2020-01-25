@@ -9,7 +9,6 @@
     "watch": "nodemon server.js",
     "seed": "node seeders/seed.js",
     "dev": "nodemon server.js",
-    "postinstall": "node seeders/seed.js"
   },
   "author": "",
   "license": "ISC",
