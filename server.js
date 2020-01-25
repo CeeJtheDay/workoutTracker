@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 // const path = require("path");
 
 const PORT = process.env.PORT || 3000;
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/3000";
 
 const db = require("./models");
 const app = express();
@@ -20,7 +21,7 @@ app.use(express.static("public"));
 require("./routes/api-routes")(app);
 require("./routes/html-routes")(app);
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/3000", { useNewUrlParser: true });
+mongoose.connect(MONGODB_URI);
 mongoose.set('useFindAndModify', false);
 
 app.listen(3000, () => {
