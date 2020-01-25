@@ -141,8 +141,8 @@ if(workoutTypeSelect) {
 }
 if(completeButton) {
   completeButton.addEventListener("click", function(event) {
-    // API.createWorkout();
-    handleFormSubmit(event);
+    API.createWorkout();
+    // handleFormSubmit(event);
     shouldNavigateAway = true;
   });
 }
