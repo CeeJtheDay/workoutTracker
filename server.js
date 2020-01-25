@@ -8,6 +8,10 @@ const PORT = process.env.PORT || 3000;
 
 const db = require("./models");
 const app = express();
+var uristring =
+    process.env.MONGOLAB_URI ||
+    process.env.MONGOHQ_URL ||
+    'mongodb://localhost/3000';
 
 app.use(logger("dev"));
 
@@ -20,11 +24,16 @@ app.use(express.static("public"));
 require("./routes/api-routes")(app);
 require("./routes/html-routes")(app);
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://heroku_mftfbwdz:ras6mvjpv40tmat015sou8252@ds035623.mlab.com:35623/heroku_mftfbwdz", { useNewUrlParser: true });
+mongoose.connect(uristring, function (err, res) {
+  if (err) {
+  console.log ('ERROR connecting to: ' + uristring + '. ' + err);
+  } else {
+  console.log ('Succeeded connected to: ' + uristring);
+  }
+}, { useNewUrlParser: true });
+
 mongoose.set('useFindAndModify', false);
 
 app.listen(3000, () => {
   console.log(`App listening on: 'http://localhost:${PORT}'`);
 });
-
-module.exports = app;
