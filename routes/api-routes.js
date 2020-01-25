@@ -18,8 +18,8 @@ module.exports = function (app) {
 
     });
 
-    // app.post("/api/workouts", (req, res) => {
-        // console.log("post that workout!");
+    app.post("/api/workouts", (req, res) => {
+        console.log("post that workout!");
         // console.log("body before create");
         // console.log(req.body);
         // exerciseArr.push(req.body);
@@ -40,7 +40,7 @@ module.exports = function (app) {
         //     .catch(err => {
         //         res.json(err);
         //     })
-    // });
+    });
 
     app.put("/api/workouts/:id", (req, res) => {
         console.log("put it with an id");
