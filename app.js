@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 // const path = require("path");
 
 const PORT = process.env.PORT || 3000;
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://user:password1@ds251622.mlab.com:51622/heroku_g64nfqrf";
+
 
 const db = require("./models");
 const app = express();
@@ -21,7 +21,7 @@ app.use(express.static("public"));
 require("./routes/api-routes")(app);
 require("./routes/html-routes")(app);
 
-mongoose.connect(MONGODB_URI, {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://user:password1@ds251622.mlab.com:51622/heroku_g64nfqrf", {
   useNewUrlParser: true,
   useFindAndModify: false
 });
