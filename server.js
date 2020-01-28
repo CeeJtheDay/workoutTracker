@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 const PORT = process.env.PORT || 3000;
 
 
-const db = require("./models");
+// const db = require("./models");
 const app = express();
 
 app.use(logger("dev"));
@@ -25,8 +25,8 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://user:password1@ds251622.m
   useNewUrlParser: true,
   useFindAndModify: false
 });
-mongoose.set('useFindAndModify', false);
+// mongoose.set('useFindAndModify', false);
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
   console.log(`App listening on: 'http://localhost:${PORT}'`);
 });
